@@ -16,5 +16,5 @@ export class Message {
   sender: User;
 
   @ManyToOne(() => User)
-  received: User;
+  receiver: User;
 }
