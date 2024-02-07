@@ -14,10 +14,4 @@ export class User {
 
   @Column({ nullable: false })
   googleID: string;
-
-  @OneToMany(() => Message, (message) => message.sender)
-  sentMessages: Message[];
-
-  @OneToMany(() => Message, (message) => message.receiver)
-  receivedMessages: Message[];
 }
