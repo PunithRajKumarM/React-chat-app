@@ -14,7 +14,4 @@ export class Message {
 
   @ManyToOne(() => User)
   sender: User;
-
-  @ManyToOne(() => User)
-  receiver: User;
 }
