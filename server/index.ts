@@ -3,8 +3,6 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const app = express();
 const PORT = 4000;
-const router = express.Router();
-const REDIRECT_URI = "http://localhost:3000/auth/google/callback";
 
 require("dotenv").config();
 
