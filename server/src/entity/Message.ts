@@ -10,7 +10,10 @@ export class Message {
   content: string;
 
   @Column({ type: "timestamp", nullable: false })
-  timestamp: Date;
+  timestamp: number;
+
+  @Column({ nullable: false })
+  userId: string;
 
   @ManyToOne(() => User)
   sender: User;
