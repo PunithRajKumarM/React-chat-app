@@ -17,7 +17,6 @@ export default function Login() {
     if (!response.ok) {
       console.log("Failed to create!");
     } else {
-      console.log(response);
       const { data } = await response.json();
       let chatUser = { email, name };
       sessionStorage.setItem("chatUser", JSON.stringify(chatUser));

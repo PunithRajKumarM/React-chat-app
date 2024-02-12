@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import io from "socket.io-client";
 import classes from "./Chat.module.css";
 
@@ -7,6 +7,16 @@ const socket = io.connect("http://localhost:4000");
 export default function Chat() {
   const [message, setMessage] = useState("");
 
+  useEffect(() => {
+    socket.on("connect", () => {
+      console.log(`User connected (client): ${socket.id}`);
+    });
+
+    socket.on("receive-message", (data) => {
+      console.log("Received chat", data);
+    });
+  }, []);
+
   async function sendMessageHandler() {
     if (message !== "") {
       let data = JSON.parse(sessionStorage.getItem("chatUser"));
@@ -14,7 +24,7 @@ export default function Chat() {
       let hours = new Date().getHours();
       let minutes = new Date().getMinutes();
       let timestamp = `${hours}:${minutes}`;
-      socket.emit("message", { message, email, name, timestamp });
+      socket.emit("chat", { message, email, name, timestamp });
       setMessage("");
     }
   }
