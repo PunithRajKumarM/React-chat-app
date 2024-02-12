@@ -1,31 +1,36 @@
 require("dotenv").config();
-import { OAuth2Client } from "google-auth-library";
 import { AppDataSource } from "../data-source";
 import { Message } from "../entity/Message";
 import { Request, Response } from "express";
+import { User } from "../entity/User";
 
+const userRepo = AppDataSource.getRepository(User);
 const messageRepo = AppDataSource.getRepository(Message);
 
-export const googleAuth = async (req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Referrer-Policy", "no-referrer-when-downgrade");
+export const googleLogin = async (req: Request, res: Response) => {
+  try {
+    let { email, name } = req.body;
+    let existingUser = await userRepo.findOne({ where: { email } });
+    if (!existingUser) {
+      let newUser = new User();
+      newUser.email = email;
+      newUser.userName = name;
+      await userRepo.save(newUser);
+      console.log("Data saved");
 
-  const redirectUrl = "http://localhost:3000";
-
-  const oAuth2Client = new OAuth2Client(
-    process.env.CLIENT_ID,
-    process.env.CLIENT_SECRET,
-    redirectUrl
-  );
-
-  const authorizeUrl = oAuth2Client.generateAuthUrl({
-    access_type: "offline",
-    scope: "https://www.googleapis.com/auth/userinfo.profile openid",
-    prompt: "consent",
-  });
+      res
+        .status(201)
+        .json({ message: "New user created successfully", data: newUser });
+    } else {
+      res
+        .status(200)
+        .json({ message: "User already exist!!!", data: existingUser });
+    }
+  } catch (error) {
+    console.error("Error during Google login:", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
 };
-
-// get User
 
 export const sendMessage = async (req: Request, res: Response) => {
   try {

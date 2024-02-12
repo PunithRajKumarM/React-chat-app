@@ -1,0 +1,9 @@
+.chatsPage {
+  height: "100dvh";
+  background-color: rgb(23, 23, 23);
+  width: "100%";
+  display: "flex";
+  flex-wrap: "wrap";
+  justify-content: "center";
+  align-items: "center";
+}

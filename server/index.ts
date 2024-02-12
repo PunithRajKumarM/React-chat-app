@@ -1,21 +1,23 @@
-import { getMessage, sendMessage } from "./src/controllers/controllers";
+import {
+  getMessage,
+  googleLogin,
+  sendMessage,
+} from "./src/controllers/controllers";
 import { AppDataSource } from "./src/data-source";
 const express = require("express");
 const bodyParser = require("body-parser");
-const session = require("express-session");
+const cors = require("cors");
 const app = express();
 const PORT = 4000;
 
 require("dotenv").config();
-
 app.use(
-  session({
-    secret: process.env.CLIENT_SECRET,
-    resave: false,
-    saveUninitialized: true,
+  cors({
+    origin: "*",
+    methods: ["GET,POST,PUT,PATCH,DELETE"],
+    credentials: true,
   })
 );
-
 app.use(express.json());
 app.use(bodyParser.json());
 
@@ -33,3 +35,4 @@ app.use(bodyParser.json());
 
 app.get("/", getMessage);
 app.post("/sendMessage", sendMessage);
+app.post("/googleLogin", googleLogin);
