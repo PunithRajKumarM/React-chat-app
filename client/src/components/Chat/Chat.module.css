@@ -48,3 +48,7 @@
   overflow-y: scroll;
   color: white;
 }
+
+.chats::-webkit-scrollbar {
+  display: none;
+}

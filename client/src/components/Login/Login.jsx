@@ -23,7 +23,6 @@ export default function Login() {
       sessionStorage.setItem("chatUser", JSON.stringify(chatUser));
       if (data) {
         window.location.reload();
-        console.log(data);
       }
     }
   };

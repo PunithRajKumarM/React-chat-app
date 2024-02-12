@@ -13,8 +13,11 @@ export class Message {
   timestamp: number;
 
   @Column({ nullable: false })
-  userId: string;
+  username: string;
 
-  @ManyToOne(() => User)
-  sender: User;
+  @Column({ nullable: false })
+  email: string;
+
+  // @ManyToOne(() => User)
+  // sender: User;
 }
