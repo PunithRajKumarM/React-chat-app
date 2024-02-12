@@ -21,8 +21,8 @@ export default function Login() {
       const { data } = await response.json();
       let chatUser = { email, name };
       sessionStorage.setItem("chatUser", JSON.stringify(chatUser));
-      window.location.reload();
       if (data) {
+        window.location.reload();
         console.log(data);
       }
     }
