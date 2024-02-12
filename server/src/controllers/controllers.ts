@@ -41,28 +41,30 @@ export const getMessage = async () => {
   }
 };
 
-export const sendMessage = async (message) => {
-  try {
-    let newMsg = new Message();
-    await messageRepo.save(newMsg);
-  } catch (error) {
-    console.log("Failed to send message!!!", error);
-  }
-};
-
-// export const sendMessage = async (req: Request, res: Response) => {
+// export const sendMessage = async (message) => {
 //   try {
 //     let newMsg = new Message();
-//     let { content, timestamp } = req.body;
-//     newMsg.content = content;
-//     newMsg.timestamp = timestamp;
 //     await messageRepo.save(newMsg);
-//     res.status(201).json({ message: "Message sent successfully!!!" });
 //   } catch (error) {
 //     console.log("Failed to send message!!!", error);
-//     res.status(500).json({ message: "Failed to send message!!!" });
 //   }
 // };
+
+export const sendMessage = async (req: Request, res: Response) => {
+  try {
+    let newMsg = new Message();
+    let { email, name, message, timestamp } = req.body;
+    newMsg.content = message;
+    newMsg.timestamp = timestamp;
+    newMsg.email = email;
+    newMsg.username = name;
+    await messageRepo.save(newMsg);
+    res.status(201).json({ message: "Message sent successfully!!!" });
+  } catch (error) {
+    console.log("Failed to send message!!!", error);
+    res.status(500).json({ message: "Failed to send message!!!" });
+  }
+};
 
 // export const getMessage = async (req, res) => {
 //   try {
