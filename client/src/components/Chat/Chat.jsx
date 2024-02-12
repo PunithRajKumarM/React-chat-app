@@ -1,5 +1,9 @@
 import React from "react";
+import io from "socket.io-client";
 import classes from "./Chat.module.css";
+
+const socket = io.connect("http://localhost:4000");
+
 export default function Chat() {
   return (
     <>
