@@ -32,19 +32,19 @@
   outline: none;
   padding: 0.5rem;
   flex-grow: 1;
-  background-color: blue;
+  background-color: white;
 }
 
 .sendChat button {
   cursor: pointer;
-  background-color: greenyellow;
+  background-color: whitesmoke;
   border: none;
   width: 15%;
 }
 
 .chats {
-  background-color: white;
+  background-color: rgb(23, 23, 23);
   height: 89vh;
   overflow-y: scroll;
-  color: black;
+  color: white;
 }
