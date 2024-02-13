@@ -7,13 +7,16 @@ export default function Login() {
     const decoded = jwtDecode(credentialResponse.credential);
 
     let { email, name } = decoded;
-    const response = await fetch("http://localhost:4000/googleLogin", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ email, name }),
-    });
+    const response = await fetch(
+      `${process.env.REACT_APP_SERVER_URL}/googleLogin`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, name }),
+      }
+    );
     if (!response.ok) {
       console.log("Failed to create!");
     } else {
