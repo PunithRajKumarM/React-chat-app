@@ -13,7 +13,7 @@
   position: relative;
   border: 1px solid white;
   width: 90vw;
-  height: 95vh;
+  height: 94vh;
   border-radius: 5px;
   overflow: hidden;
 }
@@ -24,7 +24,7 @@
   width: 100%;
   display: flex;
   flex-wrap: wrap;
-  height: 6vh;
+  height: 5vh;
 }
 
 .sendChat input {
@@ -37,11 +37,19 @@
 
 .sendChat button {
   cursor: pointer;
-  background-color: wheat;
-  border: none;
+  background-color: rgb(23, 23, 23);
   width: 15%;
-  color: rgb(23, 23, 23);
-  font-size: x-large;
+  color: white;
+  font-size: 2rem;
+  border-color: white;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.sendChat input::placeholder {
+  text-align: center;
 }
 
 .chats {

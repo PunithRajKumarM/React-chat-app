@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import io from "socket.io-client";
 import classes from "./Chats.module.css";
 import { convertTimestamp } from "../../timeStamp";
@@ -9,6 +9,7 @@ const socket = io.connect("http://localhost:4000");
 export default function Chats({ loggedUser }) {
   const [message, setMessage] = useState("");
   const [userMessages, setUserMessages] = useState([]);
+  const bottomScrollRef = useRef();
 
   useEffect(() => {
     async function getUserMessageData() {
@@ -28,31 +29,29 @@ export default function Chats({ loggedUser }) {
       }
     }
     getUserMessageData();
-  }, [setUserMessages]);
+  }, []);
 
   useEffect(() => {
     socket.on("connect", () => {
       console.log(`User connected (client): ${socket.id}`);
     });
 
-    socket.on("receive-message", async (data) => {
+    socket.on("receive-message", (data) => {
       console.log("Received chat", data);
-      if (data) {
-        const { message, email, name, timestamp } = data;
-        await fetch("http://localhost:4000/sendMessage", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ message, email, name, timestamp }),
-        });
-      }
+      setUserMessages((previousMessage) => [...previousMessage, data]);
     });
+
+    console.log("user messages", userMessages);
+
+    if (bottomScrollRef.current) {
+      bottomScrollRef.current.scrollIntoView();
+    }
+
     return () => {
       socket.off("connect");
       socket.off("receive-message");
     };
-  }, []);
+  }, [userMessages]);
 
   async function sendMessageHandler() {
     if (message !== "") {
@@ -76,13 +75,14 @@ export default function Chats({ loggedUser }) {
               userMessages.map((u, i) => {
                 return <Chat key={i} userChat={u} loggedUser={loggedUser} />;
               })}
+            <div ref={bottomScrollRef}></div>
           </div>
           <div className={classes.sendChat}>
             <input
               type="text"
               value={message}
               onChange={(e) => setMessage(e.target.value)}
-              placeholder="Enter message..."
+              placeholder="Enter message here"
               autoFocus
             />
             <button onClick={sendMessageHandler}>&rarr;</button>

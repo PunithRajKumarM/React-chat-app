@@ -10,8 +10,8 @@ export default function Chat({ userChat, loggedUser }) {
           : classes.chatWrapper
       }
     >
-      <p className={classes.chatUserName}>{userChat.username}</p>
-      <span className={classes.chatContent}>{userChat.content}</span>
+      <p className={classes.chatUserName}>{userChat.name}</p>
+      <span className={classes.chatContent}>{userChat.message}</span>
       <p className={classes.chatTimestamp}>{userChat.timestamp}</p>
     </div>
   );

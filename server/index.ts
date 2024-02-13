@@ -29,9 +29,10 @@ const io = new Server(server, {
 io.on("connection", (socket) => {
   console.log(`User connected (server): ${socket.id}`);
 
-  socket.on("chat", (payload) => {
+  socket.on("chat", async (payload) => {
     console.log("Payload", payload);
     io.emit("receive-message", payload);
+    await sendMessage(payload);
   });
 
   socket.on("disconnect", () => {
@@ -52,5 +53,5 @@ io.on("connection", (socket) => {
 })();
 
 app.get("/getMessages", getMessage);
-app.post("/sendMessage", sendMessage);
+// app.post("/sendMessage", sendMessage);
 app.post("/googleLogin", googleLogin);
