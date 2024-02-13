@@ -4,7 +4,7 @@ import classes from "./Chats.module.css";
 import { convertTimestamp } from "../../timeStamp";
 import Chat from "../Chat/Chat";
 
-const socket = io.connect("http://localhost:4000");
+const socket = io.connect(process.env.REACT_APP_SERVER_URL);
 
 export default function Chats({ loggedUser }) {
   const [message, setMessage] = useState("");
@@ -14,7 +14,9 @@ export default function Chats({ loggedUser }) {
   useEffect(() => {
     async function getUserMessageData() {
       try {
-        const response = await fetch("http://localhost:4000/getMessages");
+        const response = await fetch(
+          `${process.env.REACT_APP_SERVER_URL}/getMessages`
+        );
         if (!response.ok) {
           console.log("Failed to get user messages");
           return;
@@ -89,11 +91,7 @@ export default function Chats({ loggedUser }) {
           autoFocus
           onKeyDown={(e) => handleKeyDown(e)}
         />
-        <button
-          onClick={sendMessageHandler}
-        >
-          &rarr;
-        </button>
+        <button onClick={sendMessageHandler}>&rarr;</button>
       </div>
     </>
   );
