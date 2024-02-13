@@ -28,7 +28,7 @@ export default function Chats({ loggedUser }) {
       }
     }
     getUserMessageData();
-  }, []);
+  }, [setUserMessages]);
 
   useEffect(() => {
     socket.on("connect", () => {
@@ -48,7 +48,6 @@ export default function Chats({ loggedUser }) {
         });
       }
     });
-
     return () => {
       socket.off("connect");
       socket.off("receive-message");
@@ -86,12 +85,7 @@ export default function Chats({ loggedUser }) {
               placeholder="Enter message..."
               autoFocus
             />
-            <button
-              onClick={sendMessageHandler}
-              style={{ fontSize: "x-large", color: "red" }}
-            >
-              &rarr;
-            </button>
+            <button onClick={sendMessageHandler}>&rarr;</button>
           </div>
         </div>
       </div>
