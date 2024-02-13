@@ -25,6 +25,7 @@
 
 .chatWrapper.you .chatContent {
   border-radius: 10px 0 10px 10px;
+  background-color: rgb(37, 140, 80);
 }
 
 .chatContent {
@@ -34,4 +35,6 @@
   border-radius: 0 10px 10px 10px;
   max-width: 50%;
   word-wrap: break-word;
+  /* background-color: rgb(244, 132, 132); */
+  background-color: lightcoral;
 }

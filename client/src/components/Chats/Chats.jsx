@@ -21,7 +21,7 @@ export default function Chats({ loggedUser }) {
         }
         const { data } = await response.json();
         if (data) {
-          console.log(data);
+          // console.log(data);
           setUserMessages(data);
         }
       } catch (error) {
@@ -37,11 +37,9 @@ export default function Chats({ loggedUser }) {
     });
 
     socket.on("receive-message", (data) => {
-      console.log("Received chat", data);
+      // console.log("Received chat", data);
       setUserMessages((previousMessage) => [...previousMessage, data]);
     });
-
-    console.log("user messages", userMessages);
 
     if (bottomScrollRef.current) {
       bottomScrollRef.current.scrollIntoView();
@@ -53,7 +51,7 @@ export default function Chats({ loggedUser }) {
     };
   }, [userMessages]);
 
-  async function sendMessageHandler() {
+  function sendMessageHandler() {
     if (message !== "") {
       let data = JSON.parse(sessionStorage.getItem("chatUser"));
       let { email, name } = data;
@@ -65,29 +63,37 @@ export default function Chats({ loggedUser }) {
     }
   }
 
+  function handleKeyDown(event) {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      sendMessageHandler();
+    }
+  }
+
   return (
     <>
-      <div className={classes.chatsPage}>
-        <div className={classes.chatBox}>
-          <div className={classes.chats}>
-            {userMessages.length === 0 && null}
-            {userMessages.length > 0 &&
-              userMessages.map((u, i) => {
-                return <Chat key={i} userChat={u} loggedUser={loggedUser} />;
-              })}
-            <div ref={bottomScrollRef}></div>
-          </div>
-          <div className={classes.sendChat}>
-            <input
-              type="text"
-              value={message}
-              onChange={(e) => setMessage(e.target.value)}
-              placeholder="Enter message here"
-              autoFocus
-            />
-            <button onClick={sendMessageHandler}>&rarr;</button>
-          </div>
-        </div>
+      <div className={classes.chats}>
+        {userMessages.length === 0 && null}
+        {userMessages.length > 0 &&
+          userMessages.map((u, i) => {
+            return <Chat key={i} userChat={u} loggedUser={loggedUser} />;
+          })}
+        <div ref={bottomScrollRef}></div>
+      </div>
+      <div className={classes.sendChat}>
+        <input
+          type="text"
+          value={message}
+          onChange={(e) => setMessage(e.target.value)}
+          placeholder="Enter message here"
+          autoFocus
+          onKeyDown={(e) => handleKeyDown(e)}
+        />
+        <button
+          onClick={sendMessageHandler}
+        >
+          &rarr;
+        </button>
       </div>
     </>
   );

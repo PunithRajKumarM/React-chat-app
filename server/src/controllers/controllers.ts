@@ -16,7 +16,7 @@ export const googleLogin = async (req: Request, res: Response) => {
       newUser.email = email;
       newUser.userName = name;
       await userRepo.save(newUser);
-      console.log("Data saved");
+      // console.log("Data saved");
 
       res
         .status(201)
@@ -33,7 +33,7 @@ export const googleLogin = async (req: Request, res: Response) => {
 };
 
 export const sendMessage = async (payload) => {
-  console.log("received payload", payload);
+  // console.log("received payload", payload);
 
   try {
     let newMsg = new Message();
@@ -42,9 +42,9 @@ export const sendMessage = async (payload) => {
     newMsg.timestamp = timestamp;
     newMsg.email = email;
     newMsg.name = name;
-    console.log("New message", newMsg);
+    // console.log("New message", newMsg);
     await messageRepo.save(newMsg);
-    console.log("done saving...");
+    // console.log("done saving...");
   } catch (error) {
     console.log("Failed to send message!!!", error);
   }

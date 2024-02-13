@@ -7,7 +7,7 @@ export default function App() {
   const [loggedUser, setLoggedUser] = useState("");
   useEffect(() => {
     let userData = JSON.parse(sessionStorage.getItem("chatUser"));
-    console.log(userData);
+    // console.log(userData);
     if (userData && userData.email && userData.name) {
       setIsLogged(true);
       setLoggedUser(userData);

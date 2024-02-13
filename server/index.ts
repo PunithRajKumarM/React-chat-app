@@ -30,7 +30,7 @@ io.on("connection", (socket) => {
   console.log(`User connected (server): ${socket.id}`);
 
   socket.on("chat", async (payload) => {
-    console.log("Payload", payload);
+    // console.log("Payload", payload);
     io.emit("receive-message", payload);
     await sendMessage(payload);
   });
