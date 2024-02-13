@@ -32,25 +32,8 @@ export const googleLogin = async (req: Request, res: Response) => {
   }
 };
 
-export const getMessage = async () => {
-  try {
-    const allMessages = await messageRepo.find();
-    console.log(allMessages);
-  } catch (error) {
-    console.log("Failed to get messages!!!", error);
-  }
-};
-
-// export const sendMessage = async (message) => {
-//   try {
-//     let newMsg = new Message();
-//     await messageRepo.save(newMsg);
-//   } catch (error) {
-//     console.log("Failed to send message!!!", error);
-//   }
-// };
-
 export const sendMessage = async (req: Request, res: Response) => {
+  console.log("request body", req.body);
   try {
     let newMsg = new Message();
     let { email, name, message, timestamp } = req.body;
@@ -58,23 +41,25 @@ export const sendMessage = async (req: Request, res: Response) => {
     newMsg.timestamp = timestamp;
     newMsg.email = email;
     newMsg.username = name;
+    console.log("New message", newMsg);
     await messageRepo.save(newMsg);
-    res.status(201).json({ message: "Message sent successfully!!!" });
+    console.log("done saving...");
+    res.status(201).send({ message: "Message sent successfully!!!" });
   } catch (error) {
     console.log("Failed to send message!!!", error);
-    res.status(500).json({ message: "Failed to send message!!!" });
+    res.status(500).send({ message: "Failed to send message!!!" });
   }
 };
 
-// export const getMessage = async (req, res) => {
-//   try {
-//     let userId = req.session.userId;
-//     const messages = await messageRepo.find({ where: { userId } });
-//     res
-//       .status(200)
-//       .json({ message: "Messages received successfully!!!", data: messages });
-//   } catch (error) {
-//     console.log("Failed to get messages!!!", error);
-//     res.status(500).json({ message: "Failed to get messages!!!" });
-//   }
-// };
+export const getMessage = async (_, res) => {
+  try {
+    const allMessages = await messageRepo.find();
+    res.status(200).json({
+      message: "Messages received successfully!!!",
+      data: allMessages,
+    });
+  } catch (error) {
+    console.log("Failed to get messages!!!", error);
+    res.status(500).json({ message: "Failed to get messages!!!" });
+  }
+};

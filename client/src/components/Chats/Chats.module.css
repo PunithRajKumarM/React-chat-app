@@ -1,0 +1,54 @@
+.chatsPage {
+  background-color: rgb(23, 23, 23);
+  width: 100%;
+  height: 100vh;
+  color: white;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.chatBox {
+  position: relative;
+  border: 1px solid red;
+  width: 90vw;
+  height: 95vh;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.sendChat {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  height: 6vh;
+}
+
+.sendChat input {
+  border: none;
+  outline: none;
+  padding: 0.5rem;
+  flex-grow: 1;
+  background-color: white;
+}
+
+.sendChat button {
+  cursor: pointer;
+  background-color: whitesmoke;
+  border: none;
+  width: 15%;
+}
+
+.chats {
+  background-color: rgb(23, 23, 23);
+  height: 89vh;
+  overflow-y: scroll;
+  color: white;
+}
+
+.chats::-webkit-scrollbar {
+  display: none;
+}

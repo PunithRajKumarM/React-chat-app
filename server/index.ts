@@ -51,6 +51,6 @@ io.on("connection", (socket) => {
   }
 })();
 
-app.get("/", getMessage);
+app.get("/getMessages", getMessage);
 app.post("/sendMessage", sendMessage);
 app.post("/googleLogin", googleLogin);

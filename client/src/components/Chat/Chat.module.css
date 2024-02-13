@@ -1,54 +1,37 @@
-.chatsPage {
-  background-color: rgb(23, 23, 23);
-  width: 100%;
-  height: 100vh;
-  color: white;
+.chatWrapper.you {
+  align-items: flex-end;
+}
+
+.chatWrapper {
+  padding: 0.5rem;
   display: flex;
+  flex-direction: column;
   flex-wrap: wrap;
   justify-content: center;
-  align-items: center;
+  gap: 0.5rem;
+  align-items: flex-start;
 }
 
-.chatBox {
-  position: relative;
-  border: 1px solid red;
-  width: 90vw;
-  height: 95vh;
-  border-radius: 5px;
-  overflow: hidden;
+.chatWrapper.you .chatUserName,
+.chatWrapper.you .chatTimestamp {
+  margin-right: 0.25rem;
+  font-size: x-small;
+}
+.chatUserName,
+.chatTimestamp {
+  margin-left: 0.25rem;
+  font-size: x-small;
 }
 
-.sendChat {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  display: flex;
-  flex-wrap: wrap;
-  height: 6vh;
+.chatWrapper.you .chatContent {
+  border-radius: 10px 0 10px 10px;
 }
 
-.sendChat input {
-  border: none;
-  outline: none;
+.chatContent {
+  display: inline-block;
   padding: 0.5rem;
-  flex-grow: 1;
-  background-color: white;
-}
-
-.sendChat button {
-  cursor: pointer;
-  background-color: whitesmoke;
-  border: none;
-  width: 15%;
-}
-
-.chats {
-  background-color: rgb(23, 23, 23);
-  height: 89vh;
-  overflow-y: scroll;
-  color: white;
-}
-
-.chats::-webkit-scrollbar {
-  display: none;
+  border: 1px solid white;
+  border-radius: 0 10px 10px 10px;
+  max-width: 50%;
+  word-wrap: break-word;
 }

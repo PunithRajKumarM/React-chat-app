@@ -9,8 +9,8 @@ export class Message {
   @Column({ nullable: false })
   content: string;
 
-  @Column({ type: "timestamp", nullable: false })
-  timestamp: number;
+  @Column({ nullable: false })
+  timestamp: string;
 
   @Column({ nullable: false })
   username: string;
