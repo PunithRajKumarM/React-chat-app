@@ -5,6 +5,15 @@
   color: white;
 }
 
+.chatsLoader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(23, 23, 23);
+  height: calc(100vh - 50px);
+  overflow-y: scroll;
+}
+
 .chats::-webkit-scrollbar {
   display: none;
 }
@@ -34,4 +43,9 @@
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
+}
+
+.chatsLoader .chatLoader {
+  width: 100%;
+  height: inherit;
 }

@@ -4,6 +4,7 @@ import classes from "./Chats.module.css";
 import { convertTimestamp } from "../../timeStamp";
 import Chat from "../Chat/Chat";
 import SendIcon from "@mui/icons-material/Send";
+import Loader from "../../mui/Loader";
 
 const socket = io.connect(process.env.REACT_APP_SERVER_URL);
 
@@ -11,9 +12,11 @@ export default function Chats({ loggedUser }) {
   const [message, setMessage] = useState("");
   const [userMessages, setUserMessages] = useState([]);
   const bottomScrollRef = useRef();
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     async function getUserMessageData() {
+      setLoading(true);
       try {
         const response = await fetch(
           `${process.env.REACT_APP_SERVER_URL}/getMessages`
@@ -22,8 +25,10 @@ export default function Chats({ loggedUser }) {
           console.log("Failed to get user messages");
           return;
         }
+
         const { data } = await response.json();
         if (data) {
+          setLoading(false);
           // console.log(data);
           setUserMessages(data);
         }
@@ -75,8 +80,9 @@ export default function Chats({ loggedUser }) {
 
   return (
     <>
-      <div className={classes.chats}>
+      <div className={loading ? classes.chatsLoader : classes.chats}>
         {userMessages.length === 0 && null}
+        {loading && <Loader />}
         {userMessages.length > 0 &&
           userMessages.map((u, i) => {
             return <Chat key={i} userChat={u} loggedUser={loggedUser} />;
