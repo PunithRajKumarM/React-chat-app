@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { GoogleLogin } from "@react-oauth/google";
 import { jwtDecode } from "jwt-decode";
+import Loader from "../../mui/Loader";
 
 export default function Login() {
+  const [loading, setLoading] = useState(false);
   const loginHandler = async (credentialResponse) => {
     const decoded = jwtDecode(credentialResponse.credential);
 
@@ -20,6 +22,7 @@ export default function Login() {
     if (!response.ok) {
       console.log("Failed to create!");
     } else {
+      setLoading(true);
       const { data } = await response.json();
       let chatUser = { email, name };
       sessionStorage.setItem("chatUser", JSON.stringify(chatUser));
@@ -40,14 +43,17 @@ export default function Login() {
           alignItems: "center",
         }}
       >
-        <GoogleLogin
-          onSuccess={(credentialResponse) => {
-            loginHandler(credentialResponse);
-          }}
-          onError={() => {
-            console.log("Login Failed");
-          }}
-        />
+        {loading && <Loader />}
+        {!loading && (
+          <GoogleLogin
+            onSuccess={(credentialResponse) => {
+              loginHandler(credentialResponse);
+            }}
+            onError={() => {
+              console.log("Login Failed");
+            }}
+          />
+        )}
       </div>
     </>
   );
