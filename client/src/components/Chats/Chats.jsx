@@ -3,8 +3,8 @@ import io from "socket.io-client";
 import classes from "./Chats.module.css";
 import { convertTimestamp } from "../../timeStamp";
 import Chat from "../Chat/Chat";
-import SendIcon from "@mui/icons-material/Send";
 import Loader from "../../mui/Loader";
+import MessageField from "../MessageField/MessageField";
 
 const socket = io.connect(process.env.REACT_APP_SERVER_URL);
 
@@ -78,8 +78,18 @@ export default function Chats({ loggedUser }) {
     }
   }
 
+  function logoutHandler() {
+    sessionStorage.clear();
+    window.location.reload();
+  }
+
   return (
-    <>
+    <div className={classes.chatsWrapper}>
+      <header className={classes.chatsHeader}>
+        <p>Hello {loggedUser.name}</p>
+        <button onClick={logoutHandler}>Logout</button>
+      </header>
+
       <div className={loading ? classes.chatsLoader : classes.chats}>
         {userMessages.length === 0 && null}
         {loading && <Loader />}
@@ -89,19 +99,14 @@ export default function Chats({ loggedUser }) {
           })}
         <div ref={bottomScrollRef}></div>
       </div>
-      <div className={classes.sendChat}>
-        <input
-          type="text"
-          value={message}
-          onChange={(e) => setMessage(e.target.value)}
-          placeholder="Start sending message..."
-          autoFocus
-          onKeyDown={(e) => handleKeyDown(e)}
-        />
-        <button onClick={sendMessageHandler} disabled={!message}>
-          <SendIcon />
-        </button>
-      </div>
-    </>
+
+      <MessageField
+        className={classes.sendChat}
+        message={message}
+        setMessage={setMessage}
+        handleKeyDown={handleKeyDown}
+        sendMessageHandler={sendMessageHandler}
+      />
+    </div>
   );
 }
