@@ -28,16 +28,10 @@
 .sendChat button {
   cursor: pointer;
   background-color: rgb(23, 23, 23);
-  width: 15%;
+  width: 5%;
   color: white;
-  font-size: 2rem;
-  border-color: white;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-}
-
-.sendChat input::placeholder {
-  text-align: center;
 }

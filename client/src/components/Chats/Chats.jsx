@@ -3,6 +3,7 @@ import io from "socket.io-client";
 import classes from "./Chats.module.css";
 import { convertTimestamp } from "../../timeStamp";
 import Chat from "../Chat/Chat";
+import SendIcon from "@mui/icons-material/Send";
 
 const socket = io.connect(process.env.REACT_APP_SERVER_URL);
 
@@ -87,11 +88,13 @@ export default function Chats({ loggedUser }) {
           type="text"
           value={message}
           onChange={(e) => setMessage(e.target.value)}
-          placeholder="Enter message here"
+          placeholder="Start sending message..."
           autoFocus
           onKeyDown={(e) => handleKeyDown(e)}
         />
-        <button onClick={sendMessageHandler}>&rarr;</button>
+        <button onClick={sendMessageHandler} disabled={!message}>
+          <SendIcon />
+        </button>
       </div>
     </>
   );
