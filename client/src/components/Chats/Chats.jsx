@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import io from "socket.io-client";
 import classes from "./Chats.module.css";
-import { convertTimestamp } from "../../timestampHandler";
 import Chat from "../Chat/Chat";
 import Loader from "../../mui/Loader";
 import MessageField from "../MessageField/MessageField";
@@ -63,9 +62,6 @@ export default function Chats({ loggedUser }) {
     if (message !== "") {
       let data = JSON.parse(sessionStorage.getItem("chatUser"));
       let { email, name } = data;
-      // let hours = new Date().getHours();
-      // let minutes = new Date().getMinutes();
-      // let timestamp = convertTimestamp(hours, minutes);
       let timestamp = new Date().valueOf().toString();
       // console.log(typeof timestamp);
       socket.emit("chat", { message, email, name, timestamp });

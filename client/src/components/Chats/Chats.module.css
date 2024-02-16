@@ -75,7 +75,7 @@
 .sendChat button {
   cursor: pointer;
   background-color: rgb(23, 23, 23);
-  width: 5%;
+  width: 3rem;
   color: white;
   display: flex;
   flex-wrap: wrap;
