@@ -84,7 +84,7 @@
 }
 
 .sendChat button:disabled {
-  background-color: rgb(51, 51, 51);
+  background-color: gray;
 }
 
 .chatsLoader .chatLoader {
