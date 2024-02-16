@@ -33,7 +33,7 @@ export const googleLogin = async (req: Request, res: Response) => {
 };
 
 export const sendMessage = async (payload) => {
-  // console.log("received payload", payload);
+  console.log("received payload", payload);
 
   try {
     let newMsg = new Message();

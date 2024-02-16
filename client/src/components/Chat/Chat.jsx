@@ -1,7 +1,11 @@
 import React from "react";
 import classes from "./Chat.module.css";
+import { timestampHandler } from "../../timestampHandler";
 
 export default function Chat({ userChat, loggedUser }) {
+  let { timestamp } = userChat;
+  let value = timestampHandler(+timestamp);
+
   return (
     <div
       className={
@@ -12,7 +16,7 @@ export default function Chat({ userChat, loggedUser }) {
     >
       <p className={classes.chatUserName}>{userChat.name}</p>
       <span className={classes.chatContent}>{userChat.message}</span>
-      <p className={classes.chatTimestamp}>{userChat.timestamp}</p>
+      <p className={classes.chatTimestamp}>{value}</p>
     </div>
   );
 }
