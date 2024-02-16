@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { GoogleLogin } from "@react-oauth/google";
 import { jwtDecode } from "jwt-decode";
-import Loader from "../../mui/Loader";
+import Loader from "../mui/Loader";
 import { googleLoginHandler } from "../../apiHandler";
 
 export default function Login() {
