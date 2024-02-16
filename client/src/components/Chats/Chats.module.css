@@ -83,6 +83,10 @@
   align-items: center;
 }
 
+.sendChat button:disabled {
+  background-color: rgb(51, 51, 51);
+}
+
 .chatsLoader .chatLoader {
   width: 100%;
   height: inherit;
