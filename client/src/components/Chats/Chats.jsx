@@ -67,7 +67,7 @@ export default function Chats({ loggedUser }) {
       // let minutes = new Date().getMinutes();
       // let timestamp = convertTimestamp(hours, minutes);
       let timestamp = new Date().valueOf().toString();
-      console.log(typeof timestamp);
+      // console.log(typeof timestamp);
       socket.emit("chat", { message, email, name, timestamp });
       setMessage("");
     }
