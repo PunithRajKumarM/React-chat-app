@@ -2,23 +2,19 @@ import React, { useState } from "react";
 import { GoogleLogin } from "@react-oauth/google";
 import { jwtDecode } from "jwt-decode";
 import Loader from "../../mui/Loader";
+import { googleLoginHandler } from "../../apiHandler";
 
 export default function Login() {
   const [loading, setLoading] = useState(false);
+
   const loginHandler = async (credentialResponse) => {
     const decoded = jwtDecode(credentialResponse.credential);
 
     let { email, name } = decoded;
-    const response = await fetch(
-      `${process.env.REACT_APP_SERVER_URL}/googleLogin`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email, name }),
-      }
-    );
+    let data = { email, name };
+
+    const response = await googleLoginHandler("googleLogin", data);
+
     if (!response.ok) {
       console.log("Failed to create!");
     } else {

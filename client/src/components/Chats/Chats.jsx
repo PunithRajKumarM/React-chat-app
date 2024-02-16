@@ -4,6 +4,7 @@ import classes from "./Chats.module.css";
 import Chat from "../Chat/Chat";
 import Loader from "../../mui/Loader";
 import MessageField from "../MessageField/MessageField";
+import { getMessagesHandler } from "../../apiHandler";
 
 const socket = io.connect(process.env.REACT_APP_SERVER_URL);
 
@@ -17,9 +18,8 @@ export default function Chats({ loggedUser }) {
     async function getUserMessageData() {
       setLoading(true);
       try {
-        const response = await fetch(
-          `${process.env.REACT_APP_SERVER_URL}/getMessages`
-        );
+        const response = await getMessagesHandler("getMessages");
+
         if (!response.ok) {
           console.log("Failed to get user messages");
           return;
