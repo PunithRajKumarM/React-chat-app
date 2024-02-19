@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import io from "socket.io-client";
 import classes from "./Chats.module.css";
 import Chat from "../Chat/Chat";
-import Loader from "../../mui/Loader";
+import Loader from "../mui/Loader";
 import MessageField from "../MessageField/MessageField";
 import { getMessagesHandler } from "../../apiHandler";
 
