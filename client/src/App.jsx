@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Login from "./components/Login/Login";
 import Chats from "./components/Chats/Chats";
 
+// App
 export default function App() {
   const [isLogged, setIsLogged] = useState(false);
   const [loggedUser, setLoggedUser] = useState("");
